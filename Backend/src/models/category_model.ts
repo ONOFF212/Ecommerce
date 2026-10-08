@@ -1,6 +1,3 @@
-
-
-
 import {
     Entity,
     Column, 
@@ -8,9 +5,7 @@ import {
     OneToMany,
     JoinTable} from "typeorm";
 
-import "reflect-metadata";
-import { Products } from "./produtcModel.js";
-
+import { Products } from "./product_model.ts";
 
 @Entity()
 export class Category{
@@ -18,11 +13,10 @@ export class Category{
     id:number;
 
     @Column({ type: "varchar" })
-    Name:string;
+    name:string;
 
     @OneToMany(() => Products, product => product.category)
     product : Products[];
-
 };
 
 

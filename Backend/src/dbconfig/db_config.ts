@@ -5,8 +5,10 @@ import {DataSource} from 'typeorm';
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 
-import { Products } from '../Models/produtcModel.js';
-import { Category } from '../Models/categoryModel.js';
+import { Products } from '../models/product_model.ts';
+import { Category } from '../models/category_model.ts';
+import { Users } from '../models/user_model.ts';
+import { Roles } from '../models/role_model.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -24,7 +26,9 @@ export const db_Connection = new DataSource({
 
     entities:[
         Products,
-        Category
+        Category,
+        Users,
+        Roles
     ],
 
     migrations:[

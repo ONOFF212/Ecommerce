@@ -1,6 +1,6 @@
 
 import { Context } from 'koa';
-import {getItemList, getItemsById} from '../services/product_Services.js';
+import {getItemList, getItemsById} from '../services/product_Services.ts';
 
 export const getProducts = async (ctx:Context) => {
     const result = await getItemList();

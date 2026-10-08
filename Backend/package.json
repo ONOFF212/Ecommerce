@@ -7,10 +7,10 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "dev": "tsx watch src/index.ts",
-    "typeorm": "typeorm-ts-node-esm",
-    "migration:generate": "npm run typeorm migration:generate -- -d src/dbConfig/dbconfig.ts",
-    "migration:run": "npm run typeorm migration:run -- -d src/dbConfig/dbconfig.ts",
-    "migration:revert": "npm run typeorm migration:revert -- -d src/dbConfig/dbconfig.ts"
+    "typeorm": "tsx ./node_modules/typeorm/cli.js",
+    "migration:generate": "npm run typeorm -- migration:generate ./src/migrations/InitialMigration -d ./src/dbConfig/db_config.ts",
+    "migration:run": "npm run typeorm -- migration:run -d ./src/dbConfig/db_config.ts",
+    "migration:revert": "npm run typeorm -- migration:revert -d ./src/dbConfig/db_config.ts"
   },
   "keywords": [],
   "author": "",
@@ -19,16 +19,20 @@
   "dependencies": {
     "@koa/cors": "^5.0.0",
     "@koa/router": "^15.7.0",
+    "@types/bcrypt": "^6.0.0",
+    "bcrypt": "^6.0.0",
     "dotenv": "^18.0.5",
+    "jsonwebtoken": "^9.0.3",
     "koa": "^3.2.1",
     "koa-bodyparser": "^4.4.1",
     "koa-mount": "^4.2.0",
     "koa-static": "^5.0.0",
     "pg": "^8.23.1",
     "reflect-metadata": "^0.2.2",
-    "typeorm": "^1.1.1"
+    "typeorm": "^0.3.31"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/koa": "^3.0.3",
     "@types/koa__cors": "^5.0.1",
     "@types/koa-bodyparser": "^4.3.13",
@@ -40,6 +44,6 @@
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.23.15",
-    "typescript": "^4.9.5"
+    "typescript": "5.9"
   }
 }
