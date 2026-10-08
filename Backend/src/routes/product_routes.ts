@@ -1,13 +1,13 @@
 
 import Router from "@koa/router";
 
-import {getProducts, getProductsById} from '../controllers/product_controller.js';
+import {getProducts, getProductsById} from '../controllers/product_controller.ts';
 
 
 
-export const router =new Router();
+export const product_router =new Router({prefix:"/api"});
 
 
-router.get('/products', getProducts);
-router.get('/products/:id', getProductsById);
+product_router.get('/products', getProducts);
+product_router.get('/products/:id', getProductsById);
 

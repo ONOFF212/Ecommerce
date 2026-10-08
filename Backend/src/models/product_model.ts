@@ -6,7 +6,7 @@ import {Entity,
     JoinColumn} from "typeorm";
 
 import "reflect-metadata";
-import { Category } from "./categoryModel.js";
+import { Category } from "./category_model.ts";
 
 
 @Entity()
@@ -15,19 +15,19 @@ export class Products{
     id:number;
 
     @Column({ type: "varchar" })
-    Name:string;
+    name:string;
 
     @Column({ type: "varchar" })
-    Description:string;
+    description:string;
 
     @Column({ type: "varchar" })
-    Price:string;
+    price:string;
 
     @Column({ type: "varchar" })
-    Stock:string;
+    stock:string;
 
     @Column({ type: "varchar" })
-    imgUrl:string;
+    img_url:string;
 
     @ManyToOne(()=> Category, category => category.product)
     @JoinColumn({ name: "categoryId" })
