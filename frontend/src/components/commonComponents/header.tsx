@@ -1,8 +1,4 @@
 
-
-
-
-
 export default function Header() {
     return(
         <div className="  font-bold text-green-500 py-4 text-center">

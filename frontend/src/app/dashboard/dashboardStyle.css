@@ -1,0 +1,170 @@
+
+.profile-page, .edit-profile{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:30px 16px;
+    background: #f3f6fb;
+}
+
+.profile-card{
+    width: 100%;
+    max-width: 480px;
+    box-sizing: border-box;
+    padding: 35px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px;
+}
+
+.profile-header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.img-box{
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    border:5px solid #eaf1fb;
+    margin-bottom: 16px;
+    background:linear-gradient(135deg, #5a8ccd, #3565a5);
+}
+
+.profile-header h1{
+    font-size: 27px;
+    font-weight: 700;
+    color: #1e293b;
+    margin:0;
+}
+
+.profile-subtitle{
+    margin: 8px 0 0;
+    padding:0;
+    border:none;
+    background: transparent;
+    color: #64748b;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+}
+
+.profile-details{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profile-field label{
+    display: block;
+    margin: 0 0 8px;
+    padding: 0;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.profile-field p{
+    width: 100%;
+    min-height: 46px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 12px 15px;
+    border:1px solid #e2e8f0;
+    border-radius: 10px;
+    color:#334155;
+    background: #f8fafc;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    overflow-wrap: anywhere;
+}
+
+.btn{
+    width: 45%;
+    margin-top: 28px;
+    padding: 13px;
+    border: none;
+    border-radius: 10px;
+    background: #dc3545;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 20;
+}
+
+.btn:hover{
+    background: #bb2534;
+}
+
+.form-container{
+    background: white;
+    display: flex;
+    padding:20px;
+    min-width: fit-content;
+    border:4px solid rgba(0, 0, 0, 0.027);
+    justify-content: flex-start;
+    border-radius: 20px;
+}
+
+input, select{
+    width:100%;
+    padding: 8px;
+    border:none;
+    outline:none;
+    color:#333;
+    background: #eee;
+    border-radius:10px ;
+    font-size: 16px;
+    margin-bottom:20px;
+}
+
+label, select, p, button{
+    font-family: 'Inter', 'Poppins';
+    font-weight: bold;
+}
+
+.edit-btne{
+    width: 50%;
+    margin-top: 28px;
+    padding: 13px;
+    border: none;
+    border-radius: 40px;
+    background: #2d09f7;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 20;
+}
+.edit-btnc{
+    width: 42%;
+    margin-top: 28px;
+    padding: 13px;
+    border: none;
+    border-radius: 40px;
+    background: #233a79;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.edit-btne:hover{
+    background: #219c54;
+}
+.edit-btnc:hover{
+    background: #d60d0d;
+}

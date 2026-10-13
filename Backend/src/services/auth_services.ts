@@ -21,8 +21,15 @@ async function rolecheck(role:string): Promise<Roles> {
 };
 
 export const createUser = async (ctx:Context)=>{
-    const {name, email, password, role} = ctx.request.body as userTypes;
-    
+    const {name, email, password, role} = ctx.request.body as userTypes; //roleId
+    console.log(ctx.request.body);
+
+    const emailResult = await verifyEmail(email);
+
+    if(emailResult){
+        return ctx.body = {message:"Already Exist....."};
+    }
+    console.log(email);
     const userRepo = await db_Connection.getRepository(Users);
 
     const roless = await rolecheck(role);
@@ -37,14 +44,16 @@ export const createUser = async (ctx:Context)=>{
     await userRepo.save(users);
 
     const Token = await generateToken(users);
+
+    console.log(users);
     console.log(Token);
     ctx.status = 201;
     ctx.body = {
         message:"User Created Succesfull",
-        Token:Token
     };
-
-    return ctx.status;
+    
+    ctx.set('Authorization', Token);
+    return { status:201}; 
 };
 
 export const loginUser = async (ctx:Context) => {
@@ -74,8 +83,9 @@ export const loginUser = async (ctx:Context) => {
 
     ctx.body = {
         message:"Login Successfull",
-        Token:Token
+        
     };
+    ctx.set('Authorization', Token);
     return {token:Token, status:200}; 
 };
 

@@ -16,5 +16,5 @@ export const userDataUpdate = async(ctx:Context) => {
     const {name, email} = ctx.request.body as userTypes;
     const result = await updateUserDetail(id, name, email);
     
-    return await generateToken(ctx);
+    return  generateToken(ctx); //todo: remove this from user update
 };

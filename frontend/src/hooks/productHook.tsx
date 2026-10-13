@@ -2,7 +2,7 @@
  "use client"
 
 import { useState, useEffect } from "react";
-import { getProducts } from "@/api/productApi/pApi";
+import { getProducts } from "../app/api/productApi/pApi";
 
 export function hooksProducts(){
     interface productdetails {

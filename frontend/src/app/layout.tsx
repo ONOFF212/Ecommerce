@@ -1,15 +1,13 @@
 
+import type { ReactNode } from "react";
+import './global.css'
 
-import "./global.css";
-
-
-export default function RootLayout({ children }: LayoutProps<"/">) {
-  return (
-    <html lang="en">
-      <body>
-        {children}
-      </body>
-
-    </html>
-  );
-}
+export default function RootLayout({children} : {children:ReactNode}){
+    return(
+        <html lang="en">
+            <body>
+                {children}
+            </body>
+        </html>
+    );
+};
