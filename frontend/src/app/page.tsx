@@ -1,30 +1,25 @@
 
 "use client"
-import Header from "@/components/header";
-import Footer from "@/components/footer";
+import Header from "@/components/commonComponents/header";
+import Mainnavbar from "@/components/navbars/homeNavbars";
+import Footer from "@/components/commonComponents/footer";
 
-import Navbar from "@/components/navbar";
-import { hooksProducts } from "@/hooks/productHooks";
-import {ProductsList} from "@/components/productList";
-
-import { EmptystateImage } from "@/components/emptyState";
+import { hooksProducts } from "@/hooks/productHook";
+import {ProductsList} from "@/components/commonComponents/productList";
 
 
-export default function Home() {
-  const {products} = hooksProducts();
-
-  return (
-    <div>
-      <Header />
-      <Navbar />
+export default function Home(){
+      const {products} = hooksProducts();
+    return(
+        <>
+        <Header />
+        <Mainnavbar />
       <main>
         <div>
           <ProductsList products={products}/>
         </div>
       </main>
-      <div className="mt-32">
-        <Footer/>
-      </div>
-    </div>
-  );
-}
+        <Footer />
+        </>
+    );
+};

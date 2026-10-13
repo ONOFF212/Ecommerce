@@ -1,12 +1,15 @@
 
 import { Context } from "koa";
 import { createUser, loginUser } from "../services/auth_services.ts";
+import { userTypes } from "../type_Checking/user_dbType.ts";
 
 
 export const signup = async(ctx:Context) => {
+    const data = ctx.request.body as userTypes;
+    console.log(ctx.request.body);
     const result = await createUser(ctx); 
 
-    if (result === 201){
+    if (result.status === 201){
         return ctx.status;
     }
     

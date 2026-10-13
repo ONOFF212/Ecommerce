@@ -10,5 +10,6 @@ export async  function getProducts() {
     }
     console.log("Data Fetch Successfull");
 
-    return response.json();
+    const data = response.json();
+    return data;
 };

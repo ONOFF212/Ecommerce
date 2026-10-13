@@ -23,9 +23,10 @@ import { rolebasemiddleware } from './middlewares/role_basemiddleware.ts';
 
 const app = new Koa();
 
-// app.use(cors({
-//     origin:"http://localhost:3000"
-// }));
+app.use(cors({
+    exposeHeaders:['Authorization', 'X-Total-Count'],
+    origin:"http://localhost:3000"
+}));
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

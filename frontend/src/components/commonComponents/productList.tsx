@@ -1,5 +1,5 @@
-import { ProductCard } from "./productCard";
 
+import { ProductCard } from "./productCard";
 
 interface productsDetails {
     id : number,
@@ -14,7 +14,7 @@ interface productsListProps {
     products:productsDetails[];
 }
 
-import { hooksProducts } from "@/hooks/productHooks";
+import { hooksProducts } from "@/hooks/productHook";
 import { EmptystateImage } from "./emptyState";
 
 export  function ProductsList({products} : productsListProps){
