@@ -8,9 +8,9 @@
     "start": "node dist/index.js",
     "dev": "tsx watch src/index.ts",
     "typeorm": "tsx ./node_modules/typeorm/cli.js",
-    "migration:generate": "npm run typeorm -- migration:generate ./src/migrations/InitialMigration -d ./src/dbConfig/db_config.ts",
-    "migration:run": "npm run typeorm -- migration:run -d ./src/dbConfig/db_config.ts",
-    "migration:revert": "npm run typeorm -- migration:revert -d ./src/dbConfig/db_config.ts"
+    "migration:generate": "npm run typeorm -- migration:generate ./src/migrations/InitialMigration -d ./src/dbconfig/db_config.ts",
+    "migration:run": "npm run typeorm -- migration:run -d ./src/dbconfig/db_config.ts",
+    "migration:revert": "npm run typeorm -- migration:revert -d ./src/dbconfig/db_config.ts"
   },
   "keywords": [],
   "author": "",

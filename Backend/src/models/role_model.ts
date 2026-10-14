@@ -14,8 +14,5 @@ export class Roles {
     id:number;
 
     @Column({type:'varchar', nullable:false})
-    name:string;
-
-    @OneToMany(() => Users, user => user.roles)
-    user:Users[];  
+    name:string; 
 };

@@ -22,9 +22,9 @@ export default function LoginPage() {
         try {
             const result = await loginUser(data);
 
-            console.log("login successful:", result);
-
-            router.push("/dashboard");
+            if (result && result.user) {
+                router.push("/dashboard");
+            }
         } catch (error) {
             console.error("Registration failed:", error);
         }

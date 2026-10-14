@@ -1,16 +1,16 @@
 
-import { db_Connection } from "../dbconfig/db_config.ts";
+import { AppDataSource } from "../dbconfig/db_config.ts";
 
 import { Roles } from "../models/role_model.ts";
 
 export const seedDbRole = async () => {
     try {
-        if (!db_Connection.isInitialized) {
-            await db_Connection.initialize();
+        if (!AppDataSource.isInitialized) {
+            await AppDataSource.initialize();
             console.log("Database connected successfully...");
         }
 
-        const roleRepo = db_Connection.getRepository(Roles);
+        const roleRepo = AppDataSource.getRepository(Roles);
 
         const roleData = [
             { name: "customer" },

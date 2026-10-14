@@ -3,17 +3,23 @@ import { Context } from "koa";
 import { getUser } from "../controllers/user_controller.ts";
 
 export const rolebasemiddleware = async(ctx:Context, next:any) => {
+  const array = ['admin', "customer"];
 
-    const {email,role} = ctx.state.user;
+  const { role } = ctx.state.user;
 
-    const roleData = await getUser(email);
-
-    if (role != roleData) {
-        ctx.status = 403;
-        ctx.body = {
-        message: "Access denied",
+  for(let i = 0; i < array.length; i++){
+    if (role == array[i]) {
+      ctx.body = {
+        message: "Access Granted",
+        status : 100
       };
-      return;
+      await next();
     }
-    await next();
+    i++;
+  }
+  ctx.body = {
+    message: "Access denied",
+    status : 403
+  }
+  return;
 };

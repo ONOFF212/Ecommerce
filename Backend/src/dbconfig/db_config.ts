@@ -13,7 +13,7 @@ import { Roles } from '../models/role_model.ts';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-export const db_Connection = new DataSource({ //TODO: AppDataSource
+export const AppDataSource = new DataSource({ //TODO: AppDataSource
     type     :"postgres",
     port     :Number(process.env.DB_PORT),
     host     :process.env.DB_HOST,

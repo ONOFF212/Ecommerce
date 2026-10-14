@@ -1,5 +1,5 @@
 
-import { db_Connection } from "../dbconfig/db_config.ts";
+import { AppDataSource } from "../dbconfig/db_config.ts";
 
 import { Products } from "../models/product_model.ts";
 import { Category } from "../models/category_model.ts";
@@ -7,13 +7,13 @@ import { Category } from "../models/category_model.ts";
 
 export const seedDatabase = async () => {
     try {
-        if (!db_Connection.isInitialized) {
-            await db_Connection.initialize();
+        if (!AppDataSource.isInitialized) {
+            await AppDataSource.initialize();
             console.log("Database connected successfully...");
         }
 
-        const categoryRepo = db_Connection.getRepository(Category);
-        const productRepo = db_Connection.getRepository(Products);
+        const categoryRepo = AppDataSource.getRepository(Category);
+        const productRepo = AppDataSource.getRepository(Products);
 
         const categoryData = [
             { name: "Health & Beauty" },

@@ -3,7 +3,7 @@
 import "../../dashboardStyle.css";
 import { updateSchema, updateInput }  from "@/utils/formTypeCheck";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+4
 import { useRouter } from "next/navigation";
 import {useForm} from 'react-hook-form';
 import { updateUser } from "@/app/api/authApi/auth";
@@ -24,6 +24,7 @@ export default  function RegisterPage() {
         try {
             await updateUser(data);
             router.push("/dashboard/profile");
+
         } catch (error) {
             console.error("Registration failed:", error);
         }

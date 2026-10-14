@@ -24,7 +24,7 @@ export class Users{
     @Column({type:'varchar', nullable:false, unique:true, length:255, select:false})
     hashed_password:string;
 
-    @ManyToOne(() => Roles, roles => roles.user)
+    @ManyToOne(() => Roles)
     @JoinColumn({name:"rolesId"})
     roles: Roles;
 }

@@ -2,91 +2,118 @@
 import { Context } from "koa";
 
 import { Users } from "../models/user_model.ts";
-import { db_Connection } from "../dbconfig/db_config.ts";
-
-import { userTypes, loginTypes  } from "../type_Checking/user_dbType.ts";
-import { comparePassword, hash_password } from "../utils/hashing_secrets.ts";
-import { Repository } from "typeorm";
 import { Roles } from "../models/role_model.ts";
+import { AppDataSource } from "../dbconfig/db_config.ts";
 
+import { userSignup, userLogin  } from "../type_Checking/user_dbType.ts";
+import { comparePassword, hash_password } from "../utils/hashing_secrets.ts";
 import { generateToken } from "../utils/jwt_token.ts";
-import { verifyEmail,verifyPass } from "../utils/verify_dbdata.ts";
 
-async function rolecheck(role:string): Promise<Roles> {
-    const roleRepo = await db_Connection.getRepository(Roles);
-    const findRole = await roleRepo.findOneBy({
-        name:role,
+const userRepo = AppDataSource.getRepository(Users);
+const roleRepo = AppDataSource.getRepository(Roles);
+
+async function findUser(email:string){
+    return await userRepo.findOne({
+        where:{
+            email
+        },
+        select:{
+            id:true,
+            name:true,
+            email:true,
+            hashed_password:true,
+            roles:{
+                name:true,
+            }
+        },
+        relations:{
+            roles:true,
+        }
     });
-    return findRole as Roles;
 };
 
-export const createUser = async (ctx:Context)=>{
-    const {name, email, password, role} = ctx.request.body as userTypes; //roleId
-    console.log(ctx.request.body);
-
-    const emailResult = await verifyEmail(email);
-
-    if(emailResult){
-        return ctx.body = {message:"Already Exist....."};
-    }
-    console.log(email);
-    const userRepo = await db_Connection.getRepository(Users);
-
-    const roless = await rolecheck(role);
-
-    const hashedPassword = await hash_password(password);
-    const users = userRepo.create({
-        name : name,
-        email:email,
-        hashed_password:hashedPassword,
-        roles:roless
-    } );
-    await userRepo.save(users);
-
-    const Token = await generateToken(users);
-
-    console.log(users);
-    console.log(Token);
-    ctx.status = 201;
-    ctx.body = {
-        message:"User Created Succesfull",
-    };
-    
-    ctx.set('Authorization', Token);
-    return { status:201}; 
+async function findRoleID (role:string){
+    return await roleRepo.findOne({
+        where:{
+            name:role
+        },
+        select:{
+            id:true,
+            name:true
+        }
+    });
 };
 
-export const loginUser = async (ctx:Context) => {
-    const {email, password} = ctx.request.body as loginTypes;
+export  async function createUser(data:userSignup){
+    const{name, email, password, role} = data;
+    const hashed_password = await hash_password(password);
 
-    const emailResult = await verifyEmail(email);
-
-    if(emailResult === null){
-        return ctx.body = {message:"Email doesn't exist...."};
+    const roleID = await findRoleID(role);
+    if(!roleID) {
+        throw new Error("Role not Found");
     }
+    const roleId = roleID?.id;
+
+    const user = userRepo.create({
+        name,
+        email,
+        hashed_password,
+        roles:{
+            id:roleId
+        }
+    });
+
+    await userRepo.save(user);
+    console.log("User Data after save ......",user);
+
+    const token = await generateToken(user);
     
-    const hashPassResult = await verifyPass(emailResult.email);
-    if (!hashPassResult) {
-        ctx.status = 404;
-        ctx.body = {
-            message: "Password hash not found..."
-        };
-        return;
+    return {
+        message:"User Created Successfully....",
+        user:{
+            id:user.id,
+            name:user.name,
+            email:user.email,
+            role:roleID?.name
+        },
+        token
+    }
+};
+
+
+export async function loginUser(data:userLogin){
+    const {email, password} = data;
+
+    const findUserDetail = await findUser(email);
+
+    if (findUserDetail === null) {
+            return {
+                 message: "E-mail didn't Found" , 
+                 status: 401 
+            };
     }
 
-    const passResult = await comparePassword(password, hashPassResult.hashed_password);
+    const passResult = await comparePassword(password, findUserDetail.hashed_password);
 
-    if(!passResult){
-        return ctx.body = {message:"Password doesn't match..."};
+    if (!passResult) {
+            return {
+                 message: "Password didn't Match" , 
+                 status: 401 
+            };
     }
-    const Token = await generateToken(emailResult);
+    const Token = await generateToken(findUserDetail);
 
-    ctx.body = {
-        message:"Login Successfull",
-        
-    };
-    ctx.set('Authorization', Token);
-    return {token:Token, status:200}; 
+    return{
+        message:"Log In Successfull....",
+        status:201,
+        user:{
+            id:findUserDetail.id,
+            name:findUserDetail.name,
+            email:findUserDetail.email,
+            role:findUserDetail.roles.name
+        },
+        Token
+    }
 };
 
 

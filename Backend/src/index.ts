@@ -11,7 +11,7 @@ import mount from "koa-mount";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 
-import { db_Connection } from './dbconfig/db_config.ts';
+import { AppDataSource } from './dbconfig/db_config.ts';
 import {product_router } from './routes/product_routes.ts';
 import { auth_router } from './routes/auth_routes.ts';
 import { user_routes } from './routes/user_routes.js';
@@ -25,6 +25,7 @@ const app = new Koa();
 
 app.use(cors({
     exposeHeaders:['Authorization', 'X-Total-Count'],
+    credentials: true,
     origin:"http://localhost:3000"
 }));
 
@@ -38,15 +39,15 @@ console.log(__dirname);
 app.use(mount('/img', serve(imageFolderPath)));
 
 app.use(auth_router.routes());
+app.use(product_router.routes());
 app.use(jwtAuthMiddlware);
 
 //app.use(rolebasemiddleware);
 app.use(user_routes.routes());
-app.use(product_router.routes());
 
 const startServer = async () => {
     try {
-        await db_Connection.initialize();
+        await AppDataSource.initialize();
         
         console.log("DB Connection Successful.....");
 

@@ -6,9 +6,9 @@ import { useAuth } from '@/contexts/authContext/authContext';
 import { useRouter } from 'next/navigation';
 
 export default function ProfilePage() {
-    const {user, logout} = useAuth();
+    const {user ,logout} = useAuth();
     const router = useRouter();
-
+    
     function editProfile(){
         router.push('/dashboard/profile/edit');
     };

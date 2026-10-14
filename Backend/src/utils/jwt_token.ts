@@ -2,15 +2,14 @@
 import 'dotenv/config';
 import  jwt  from "jsonwebtoken";
 
-import { userTypes } from '../type_Checking/user_dbType.ts';
-import { Context } from 'koa';
+import { userSignup } from '../type_Checking/user_dbType.ts';
+
 
 const JWT_SECRET = String(process.env.JWT_KEY);
 
-export function generateToken(users:any){
-    const { id, email } = users as userTypes;
-    const token = jwt.sign({ id, email }, JWT_SECRET, {expiresIn:'7d'});
-    return token;
+export function generateToken(user:any){
+    const { id,name, email } = user as userSignup;
+    return jwt.sign({ id, name , email }, JWT_SECRET, {expiresIn:'7d'});
 };
 
 export function verifyToken(token:string){
