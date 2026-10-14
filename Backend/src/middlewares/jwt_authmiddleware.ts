@@ -1,5 +1,4 @@
 
-import jwt from 'jsonwebtoken';
 import { Context } from 'koa';
 
 import { verifyToken } from '../utils/jwt_token.ts';
@@ -18,7 +17,6 @@ export const jwtAuthMiddlware =async (ctx:Context, next:any) =>{
     try{
         const data  = verifyToken(token);
         ctx.state.user = data;
-        console.log("cts.state.user verifytoken data:: ",ctx.state.user );
         await next();
 
     }catch(err){

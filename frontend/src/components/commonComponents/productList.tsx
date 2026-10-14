@@ -1,13 +1,14 @@
 
+"use client"
 import { ProductCard } from "./productCard";
 
 interface productsDetails {
     id : number,
-    imgUrl:string,
-    Name : string,
-    Stock: string,
-    Price:string,
-    Description:string
+    img_url:string,
+    name : string,
+    stock: string,
+    price:string,
+    description:string
 }
 
 interface productsListProps {
@@ -23,15 +24,14 @@ export  function ProductsList({products} : productsListProps){
         if(isLoading){
             return <EmptystateImage/>
     }
-    
     return (
         <div className="container mx-auto p-6">
             <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                {products.map((product) => (
+                {products.map(product => (
                     <div key={product.id}>
                         <ProductCard product={product}/>
                     </div>
-                ))}
+                ))};
             </ul>
         </div>
     );

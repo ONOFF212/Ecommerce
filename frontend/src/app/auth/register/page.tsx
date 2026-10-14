@@ -24,13 +24,13 @@ export default  function RegisterPage() {
 
     const onSubmit = async (data : signupInput) => {
         try {
-            console.log("Zod validated data:", data);
-
             const result = await signupUser(data);
 
-            console.log("Signup successful:", result);
+            if (result && result.user) {
+                router.push("/dashboard");
+            }
 
-            router.push("/dashboard");
+            //router.push('/dashboard');
         } catch (error) {
             console.error("Registration failed:", error);
         }

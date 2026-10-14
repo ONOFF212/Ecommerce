@@ -7,11 +7,11 @@ import { getProducts } from "../app/api/productApi/pApi";
 export function hooksProducts(){
     interface productdetails {
         id : number,
-        imgUrl:string,
-        Name : string,
-        Stock: string,
-        Price:string,
-        Description:string
+        img_url:string,
+        name : string,
+        stock: string,
+        price:string,
+        description:string
     }
 
    const [products, setProductList] = useState<productdetails[]>([]);
