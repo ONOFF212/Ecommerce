@@ -65,9 +65,8 @@ export async function loginUser(data:loginInput) {
         if (responseData && responseData.user) {
             localStorage.setItem("Current user", JSON.stringify(responseData.user));
             
-            const token = response.headers.get("Authorization");
-            if(token){
-                localStorage.setItem("Bearer", token);
+            if(responseData.token){
+                localStorage.setItem("Bearer", responseData.token);
             }
         }
 
@@ -77,7 +76,7 @@ export async function loginUser(data:loginInput) {
 export async function updateUser(data:updateInput){
     
     const token = localStorage.getItem("Bearer");
-    localStorage.removeItem("Current user");
+    
     const response = await fetch (`${process.env.NEXT_PUBLIC_API_URL}/api/users/me`, {
         method:'PUT',
         headers:{
@@ -88,20 +87,14 @@ export async function updateUser(data:updateInput){
     });
 
     const responseData = await response.json();
-
         if (!response.ok) {
             alert(responseData.message || "Failed to Update");
             alert("Failed to Update Details");
             return ;
         }
-        console.log(response);
+
         if (responseData && responseData.user) {
             localStorage.setItem("Current user", JSON.stringify(responseData.user));
-            
-            const token = response.headers.get("Authorization");
-            if(token){
-                localStorage.setItem("Bearer", token);
-            }
         }
 
         return responseData;

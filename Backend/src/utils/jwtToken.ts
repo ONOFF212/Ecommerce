@@ -2,13 +2,11 @@
 import 'dotenv/config';
 import  jwt  from "jsonwebtoken";
 
-import { userSignup } from '../type_Checking/user_dbType.ts';
-
 
 const JWT_SECRET = String(process.env.JWT_KEY);
 
 export function generateToken(user:any){
-    const { id,name, email } = user as userSignup;
+    const { id,name, email } = user as any;
     return jwt.sign({ id, name , email }, JWT_SECRET, {expiresIn:'7d'});
 };
 
@@ -21,3 +19,5 @@ export function verifyToken(token:string){
         
     }
 };
+
+//yup validation

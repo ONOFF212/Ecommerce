@@ -2,9 +2,6 @@
 import {z} from 'zod';
 
 export const signupSchema = z.object ({
-    role:z
-    .string()
-    .min(1, {message:"Select a role"}),
 
     name:z
     .string()
@@ -55,20 +52,16 @@ export const loginSchema = z.object ({
 });
 
 export const updateSchema = z.object ({
-    role:z
-    .string()
-    .min(1, {message:"Select a role"}),
 
     name:z
-    .string(),
+    .string()
+    .regex(/[A-Z]/, { message: 'Must contain at least one uppercase letter' }),
 
     email:z.
     string()
     .trim()
     .toLowerCase(),
 
-    password:z
-    .string(),
 })
 
 export type signupInput = z.infer<typeof signupSchema>;

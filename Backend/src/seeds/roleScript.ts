@@ -1,7 +1,7 @@
 
 import { AppDataSource } from "../dbconfig/db_config.ts";
 
-import { Roles } from "../models/role_model.ts";
+import { Roles } from "../entity/roleEntity.ts";
 
 export const seedDbRole = async () => {
     try {

@@ -1,7 +1,7 @@
 
 import Router from "@koa/router"
 
-import {signup, login} from "../controllers/auth_controller.ts";
+import {signup, login} from "../controllers/authController.ts";
 
 export const auth_router = new Router({prefix:'/api/auth'});
 

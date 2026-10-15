@@ -1,7 +1,7 @@
 
 import Router from "@koa/router";
 
-import {getProducts, getProductsById} from '../controllers/product_controller.ts';
+import {getProducts, getProductsById} from '../controllers/productController.ts';
 
 
 

@@ -5,7 +5,7 @@ import {
     OneToMany,
     JoinTable} from "typeorm";
 
-import { Products } from "./product_model.ts";
+import { Products } from "./productEntity.ts";
 
 @Entity()
 export class Category{

@@ -7,7 +7,7 @@ import {
     ManyToOne} 
 from 'typeorm';
 
-import { Roles } from './role_model.ts';
+import { Roles } from './roleEntity.ts';
 
 
 @Entity()
@@ -22,9 +22,9 @@ export class Users{
     email:string;
 
     @Column({type:'varchar', nullable:false, unique:true, length:255, select:false})
-    hashed_password:string;
+    password:string; //ToDo: make this name as "password"
 
     @ManyToOne(() => Roles)
-    @JoinColumn({name:"rolesId"})
+    @JoinColumn({name:"role_id"})
     roles: Roles;
 }

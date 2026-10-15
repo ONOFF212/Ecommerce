@@ -1,7 +1,7 @@
 
 import { Context } from 'koa';
 
-import { verifyToken } from '../utils/jwt_token.ts';
+import { verifyToken } from '../utils/jwtToken.ts';
 
 export const jwtAuthMiddlware =async (ctx:Context, next:any) =>{
     

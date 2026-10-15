@@ -6,7 +6,7 @@ import {Entity,
     JoinColumn} from "typeorm";
 
 import "reflect-metadata";
-import { Category } from "./category_model.ts";
+import { Category } from "./categoryEntity.ts";
 
 
 @Entity()
