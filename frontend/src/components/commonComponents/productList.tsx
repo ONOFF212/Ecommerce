@@ -2,6 +2,7 @@
 "use client"
 import { ProductCard } from "./productCard";
 
+
 interface productsDetails {
     id : number,
     img_url:string,
@@ -15,7 +16,7 @@ interface productsListProps {
     products:productsDetails[];
 }
 
-import { hooksProducts } from "@/hooks/productHook";
+import { hooksProducts } from "@/hooks/productsHook";
 import { EmptystateImage } from "./emptyState";
 
 export  function ProductsList({products} : productsListProps){
@@ -24,6 +25,7 @@ export  function ProductsList({products} : productsListProps){
         if(isLoading){
             return <EmptystateImage/>
     }
+    
     return (
         <div className="container mx-auto p-6">
             <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -36,3 +38,4 @@ export  function ProductsList({products} : productsListProps){
         </div>
     );
 };
+

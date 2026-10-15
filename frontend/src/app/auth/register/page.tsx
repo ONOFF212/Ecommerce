@@ -14,7 +14,6 @@ export default  function RegisterPage() {
     const { register, handleSubmit ,formState: { errors }, }= useForm<signupInput>({
         resolver:zodResolver(signupSchema),
         defaultValues:{
-            role:"",
             name:"",
             email:"",
             password:"",
@@ -96,18 +95,6 @@ export default  function RegisterPage() {
                         </p>
                     )}
                 </div>
-                <div>
-                    <select  {...register("role")} id="role" >
-                        <option value="">--Select Role--</option>
-                        <option value="customer">Customer</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                    {errors.role && (
-                        <p className="text-red-500 text-sm font-semibold">
-                            {errors.role.message}
-                        </p>
-                    )}
-                </div> 
                 <div>
                     <button type="submit">Register</button>
                 </div> 

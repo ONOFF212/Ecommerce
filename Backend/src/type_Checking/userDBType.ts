@@ -1,11 +1,10 @@
 
 
 export interface userSignup{
-    id:number,
     name:string,
-    email:string,
-    role:string,
-    password:string,
+    email:string, 
+    hashed_password:string,
+    roleId:number,
 }
 
 export interface userLogin{
@@ -17,7 +16,5 @@ export interface userLogin{
 export interface userUpdate{
     name:string,
     email:string,
-    password:string,
-    role:string,
 }
 

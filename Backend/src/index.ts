@@ -12,14 +12,14 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 
 import { AppDataSource } from './dbconfig/db_config.ts';
-import {product_router } from './routes/product_routes.ts';
-import { auth_router } from './routes/auth_routes.ts';
-import { user_routes } from './routes/user_routes.js';
-import { seedDatabase } from './seeds/seed_script.ts'
-import { seedDbRole } from './seeds/role_script.ts';
+import {product_router } from './routes/productRoutes.ts';
+import { auth_router } from './routes/authRoutes.ts';
+import { user_routes } from './routes/userRoutes.ts';
+import { seedDatabase } from './seeds/seedScript.ts'
+import { seedDbRole } from './seeds/roleScript.ts';
 
-import {jwtAuthMiddlware} from './middlewares/jwt_authmiddleware.ts';
-import { rolebasemiddleware } from './middlewares/role_basemiddleware.ts';
+import {jwtAuthMiddlware} from './middlewares/jwtAuthMiddleware.ts';
+import { rolebasemiddleware } from './middlewares/roleBaseMiddleware.ts';
 
 const app = new Koa();
 

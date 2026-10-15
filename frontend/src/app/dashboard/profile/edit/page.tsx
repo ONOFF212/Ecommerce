@@ -3,7 +3,7 @@
 import "../../dashboardStyle.css";
 import { updateSchema, updateInput }  from "@/utils/formTypeCheck";
 import { zodResolver } from "@hookform/resolvers/zod";
-4
+
 import { useRouter } from "next/navigation";
 import {useForm} from 'react-hook-form';
 import { updateUser } from "@/app/api/authApi/auth";
@@ -13,10 +13,8 @@ export default  function RegisterPage() {
     const { register, handleSubmit ,formState: { errors }, }= useForm<updateInput>({
         resolver:zodResolver(updateSchema),
         defaultValues:{
-            role:"",
             name:"",
             email:"",
-            password:"",
         }
     });
 
@@ -67,32 +65,7 @@ export default  function RegisterPage() {
                         </p>
                     )}
                 </div>
-                <div>
-                    <label htmlFor="password">Password</label>
-                    <input 
-                        id="password" 
-                        type="password" 
-                        placeholder="#123DSrtEUri@"
-                        {...register("password" ,{required:true})} 
-                    />
-                    {errors.password && (
-                        <p className="text-red-500 text-sm font-semibold">
-                            {errors.password.message}
-                        </p>
-                    )}
-                </div>
-                <div>
-                    <select  {...register("role")} id="role" >
-                        <option value="">--Select Role--</option>
-                        <option value="customer">Customer</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                    {errors.role && (
-                        <p className="text-red-500 text-sm font-semibold">
-                            {errors.role.message}
-                        </p>
-                    )}
-                </div> 
+
                 <div>
                     <button type="submit" className="edit-btne">Save Changes</button>
                     <button type="button" className="edit-btnc" onClick={handleCancle}>Cancel</button>

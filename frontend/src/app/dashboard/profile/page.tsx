@@ -30,12 +30,16 @@ export default function ProfilePage() {
                         <p> {user?.name || "Not avialable"}</p>
                     </div>
                     <div className='profile-field'>
-                        <label>EAIL ADDRESS</label>
+                        <label>EMAIL ADDRESS</label>
                         <p> {user?.email || "Not avialable"}</p>
                     </div>
                     <div className='profile-field'>
                         <label>ROLE</label>
-                        <p className='role-badge'> {user?.role || "Not avialable"}</p>
+                        <p className='role-badge'> 
+                            {typeof user?.role === "string"
+                            ? user.role
+                            : user?.role?.name || "Not available"}
+                        </p>
                     </div>
                 </div>
                 <div>

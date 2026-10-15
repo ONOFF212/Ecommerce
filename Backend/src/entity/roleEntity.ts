@@ -2,11 +2,8 @@
 import {
     Entity,
     Column,
-    PrimaryGeneratedColumn,
-    OneToMany
+    PrimaryGeneratedColumn
     } from 'typeorm';
-
-import { Users } from './user_model.ts';
 
 @Entity()
 export class Roles {

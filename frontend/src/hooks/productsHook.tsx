@@ -24,7 +24,7 @@ export function hooksProducts(){
                 setProductList(data);
                 setisLoading(false);
             }catch(error) {
-                console.log("Failed to load Products");
+                console.log("Failed to load Products", error);
             }
         }
         fetchProducts();
@@ -32,3 +32,5 @@ export function hooksProducts(){
 
     return {products, isLoading};
 };
+
+

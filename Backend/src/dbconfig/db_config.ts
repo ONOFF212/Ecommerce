@@ -5,10 +5,10 @@ import {DataSource} from 'typeorm';
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 
-import { Products } from '../models/product_model.ts';
-import { Category } from '../models/category_model.ts';
-import { Users } from '../models/user_model.ts';
-import { Roles } from '../models/role_model.ts';
+import { Products } from '../entity/productEntity.ts';
+import { Category } from '../entity/categoryEntity.ts';
+import { Users } from '../entity/userEntity.ts';
+import { Roles } from '../entity/roleEntity.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

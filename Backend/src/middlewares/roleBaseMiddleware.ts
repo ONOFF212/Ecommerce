@@ -1,6 +1,6 @@
 
 import { Context } from "koa";
-import { getUser } from "../controllers/user_controller.ts";
+import { getUser } from "../controllers/userController.ts";
 
 export const rolebasemiddleware = async(ctx:Context, next:any) => {
   const array = ['admin', "customer"];

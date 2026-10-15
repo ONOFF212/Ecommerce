@@ -1,8 +1,8 @@
 
 import { AppDataSource } from "../dbconfig/db_config.ts";
 
-import { Products } from "../models/product_model.ts";
-import { Category } from "../models/category_model.ts";
+import { Products } from "../entity/productEntity.ts";
+import { Category } from "../entity/categoryEntity.ts";
 // const path = require("path");
 
 export const seedDatabase = async () => {
