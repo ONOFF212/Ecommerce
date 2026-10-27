@@ -4,14 +4,15 @@
 import { useState, useEffect } from "react";
 import { getProducts } from "../app/api/productApi/pApi";
 
-export function hooksProducts(){
+export function homeProductsHooks(){
     interface productdetails {
-        id : number,
-        img_url:string,
-        name : string,
-        stock: string,
-        price:string,
-        description:string
+        id:number;
+        img_url:string;
+        name:string;
+        stock:number;
+        price:number;
+        description:string;
+        category:string;
     }
 
    const [products, setProductList] = useState<productdetails[]>([]);

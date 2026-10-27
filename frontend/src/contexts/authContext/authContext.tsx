@@ -13,15 +13,16 @@ type User = {
     id:string;
     name?:string;
     email?:string;
-    role?: string | { name: string };
+    roles?: {name: string} | { name: string };
 }
 
 type authContextType = {
     user:User | null;
     token:string | null;
+    loading:boolean;
     login:(user:User, token:string) => void;
     logout:() => void;
-    isAuthenticated:Boolean;
+    isAuthenticated:boolean;
 }
 
 const authContext = createContext<authContextType | undefined>(undefined);
@@ -30,6 +31,7 @@ export function AuthProvider({children}:{children:ReactNode}) {
     const router = useRouter();
     const [user, setUser]  = useState<User | null>(null);
     const [token, setToken]  = useState<string | null>(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         try{
@@ -38,6 +40,8 @@ export function AuthProvider({children}:{children:ReactNode}) {
             if(savedUser && savedToken) {
                 setUser(JSON.parse(savedUser) as User);
                 setToken(savedToken);
+            }else{
+                setLoading(false);
             }
         }catch{
             localStorage.removeItem("Current user");
@@ -65,9 +69,11 @@ export function AuthProvider({children}:{children:ReactNode}) {
         <authContext.Provider 
         value={{user, 
             token, 
+            loading,
             login,
+            logout,
             isAuthenticated:Boolean(user && token),  
-            logout}}>
+            }}>
                 {children}
             </authContext.Provider>
     );

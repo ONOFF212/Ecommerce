@@ -12,21 +12,24 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 
 import { AppDataSource } from './dbconfig/db_config.ts';
-import {product_router } from './routes/productRoutes.ts';
+import {home_product_router } from './routes/homeProductRoutes.ts';
+import { product_router } from './routes/productRoute.ts';
+import {adminProductRouter} from './routes/adminProductRoutes.ts';
+import {adminCategoryRouter} from './routes/adminCategoryRoutes.ts';
 import { auth_router } from './routes/authRoutes.ts';
 import { user_routes } from './routes/userRoutes.ts';
 import { seedDatabase } from './seeds/seedScript.ts'
 import { seedDbRole } from './seeds/roleScript.ts';
 
 import {jwtAuthMiddlware} from './middlewares/jwtAuthMiddleware.ts';
-import { rolebasemiddleware } from './middlewares/roleBaseMiddleware.ts';
+
 
 const app = new Koa();
 
 app.use(cors({
     exposeHeaders:['Authorization', 'X-Total-Count'],
     credentials: true,
-    origin:"http://localhost:3000"
+    origin:"http://localhost:3000",
 }));
 
 const __filename = fileURLToPath(import.meta.url);
@@ -35,15 +38,16 @@ const __dirname = dirname(__filename);
 app.use(bodyParser());
 
 const imageFolderPath = Path.join(__dirname, "..", 'img'); 
-console.log(__dirname);
 app.use(mount('/img', serve(imageFolderPath)));
 
 app.use(auth_router.routes());
-app.use(product_router.routes());
+app.use(home_product_router.routes());
 app.use(jwtAuthMiddlware);
 
-//app.use(rolebasemiddleware);
 app.use(user_routes.routes());
+app.use(product_router.routes());
+app.use(adminCategoryRouter.routes());
+app.use(adminProductRouter.routes());
 
 const startServer = async () => {
     try {

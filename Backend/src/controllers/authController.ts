@@ -1,16 +1,19 @@
 
 import { Context } from "koa";
-import { createUser, loginUser } from "../services/authServices.ts";
-import { hash_password } from "../utils/hashingSecrets.ts";
+import { createUser, findByEmail } from "../services/authServices.ts";
+import { hash_password, comparePassword } from "../utils/hashingSecrets.ts";
 import { generateToken } from "../utils/jwtToken.ts";
 
-import {findRoleID} from '../services/roleServices.ts'
+import { findRoleID } from '../services/roleServices.ts'
+import { findUserByEmail, findUserById } from "../services/userServices.ts";
+import { loginSchema, userSchema } from "../type_Checking/authDBType.ts";
 
 
 export const signup = async(ctx:Context) => {
-    const{name, email, password} = ctx.request.body as any;
 
-    const hashed_password = await hash_password(password);
+    const validatedData = await userSchema.validate(ctx.request.body, {abortEarly:false});
+
+    const hashed_password = await hash_password(validatedData.password);
     if(!hashed_password){
         console.log("Failed to hased password");
         return;
@@ -23,49 +26,59 @@ export const signup = async(ctx:Context) => {
     }
     const roleId = role?.id;
 
-    const result = await createUser({name, email, hashed_password, roleId} as any);
+    await createUser({name:validatedData.name, email:validatedData.email, hashed_password, roleId});
 
-    const Token = await generateToken(result);
-    console.log("after save data is: ", result);
+    const result = await findByEmail(validatedData.email);
+    if(!result){
+        ctx.body = {
+            message:"failed to create account",
+        }
+        return;
+    }
+
+    const Token = await generateToken({id:result.id ,name:result.name, email:result.email, role:{name:result.roles.name}});
 
     ctx.set('Authorization', Token);
     ctx.body = {
         message:"User Created successfully......",
-        user:{
-            id:result.id,
-            name:result.name,
-            email:result.email,
-            role:{
-                name:role?.name,
-            },
-        },
+        user:result,
         Token
     }
 };
 
 export const login = async(ctx:Context) => {
-    const {email, password} = ctx.request.body as any;
+    
+    const validatedLoginData = await loginSchema.validate(ctx.request.body, {abortEarly:false});
 
-    const result = await loginUser({email, password});
-
-    if (result.success) {
-        ctx.status = result.message === "User not found" ? 404 : 401;
-        ctx.body = {
-            message: result.message
+    const emailResult = await findUserByEmail(validatedLoginData.email);
+    if(!emailResult) {
+        return {
+            success:true,
+            message:"User Not Found....",
+            };
+    }
+    
+    const hashCompare = await comparePassword(validatedLoginData.password,emailResult.password);
+    if (!hashCompare) {
+        return {
+            success:true,
+            message: "Password didn't Match" , 
         };
+    }
+
+    const result = await findByEmail(validatedLoginData.email);
+    if(!result){
+        ctx.body = {
+            message:"failed to create account",
+        }
         return;
     }
-    ctx.status = 200;
+    const Token = await generateToken({id:result.id ,name:result.name, email:result.email, role:{name:result.roles.name}});
+    //const result = await findUserById(emailResult.id);
+    
     ctx.body = {
-        message: result.message,
-        user:{
-            id:result.emailResult?.id,
-            name:result.emailResult?.name,
-            email:result.emailResult?.email,
-            role:{
-                name:result.emailResult?.roles.name
-            }
-        },
-        token: result.Token
-    };
+        message:"Login Sucessful....",
+        user:result,
+        Token
+    }
 };

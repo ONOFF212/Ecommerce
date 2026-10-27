@@ -1,7 +1,7 @@
 
 import Router from "@koa/router";
-
 import { getUser, updateUserDetail } from "../controllers/userController.ts";
+
 
 export const user_routes = new Router({prefix:"/api/users"});
 

@@ -29,7 +29,6 @@ export default  function RegisterPage() {
                 router.push("/dashboard");
             }
 
-            //router.push('/dashboard');
         } catch (error) {
             console.error("Registration failed:", error);
         }

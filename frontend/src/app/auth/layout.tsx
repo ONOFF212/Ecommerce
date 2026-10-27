@@ -1,5 +1,6 @@
 
 import type { ReactNode } from "react";
+import { AuthProvider } from "@/contexts/authContext/authContext";
 
 
 export default function AuthLayout({ children,}:{children:ReactNode}) {
@@ -8,7 +9,9 @@ export default function AuthLayout({ children,}:{children:ReactNode}) {
       
       <div className="Auth-Container">
         <main>
-          {children}
+          <AuthProvider>
+            {children}
+          </AuthProvider>
         </main>
     </div>
     </div>

@@ -4,6 +4,9 @@ import {
     PrimaryGeneratedColumn, 
     Column,
     JoinColumn,
+    UpdateDateColumn,
+    CreateDateColumn,
+    DeleteDateColumn,
     ManyToOne} 
 from 'typeorm';
 
@@ -27,4 +30,13 @@ export class Users{
     @ManyToOne(() => Roles)
     @JoinColumn({name:"role_id"})
     roles: Roles;
+
+    // @CreateDateColumn()
+    // createdAt: Date;
+
+    // @UpdateDateColumn()
+    // updatedAt: Date;
+   
+    // @DeleteDateColumn({ nullable: true })
+    // deletedAt: Date | null;
 }
