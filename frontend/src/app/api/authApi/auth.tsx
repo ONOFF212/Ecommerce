@@ -1,3 +1,4 @@
+
 import { loginInput, signupInput,updateInput } from "@/utils/formTypeCheck";
 import { useAuth } from "@/contexts/authContext/authContext";
 
@@ -65,8 +66,8 @@ export async function loginUser(data:loginInput) {
         if (responseData && responseData.user) {
             localStorage.setItem("Current user", JSON.stringify(responseData.user));
             
-            if(responseData.token){
-                localStorage.setItem("Bearer", responseData.token);
+            if(responseData.Token){
+               localStorage.setItem("Bearer", responseData.Token);
             }
         }
 

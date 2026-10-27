@@ -2,5 +2,10 @@
 
 /node_modules
 
+# Ignore generated JavaScript files
+dist/
+build/
+lib/
+
 .env
 

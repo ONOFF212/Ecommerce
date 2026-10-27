@@ -1,9 +1,9 @@
 import bcrypt from "bcrypt";
+import 'dotenv/config';
 
-const saltRounds = 10;
 
 export async function hash_password(password:string){
-    return await  bcrypt.hash(password,saltRounds);
+    return await  bcrypt.hash(password,Number(process.env.SALT_ROUND));
 };
 
 export async function comparePassword(password:string, hashed_password:string ){

@@ -3,10 +3,10 @@ import { Context } from 'koa';
 
 import { verifyToken } from '../utils/jwtToken.ts';
 
-export const jwtAuthMiddlware =async (ctx:Context, next:any) =>{
+export const jwtAuthMiddlware = async (ctx:Context, next:any) =>{
     
     const token = ctx.header.authorization?.split(' ')[1];
-    console.log("headers" ,ctx.header);
+ 
     if(!token){
         return ctx.body ={
             message:"Unauthorized. Token is required.......",

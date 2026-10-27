@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Mainnavbar() {
     return (
-        <div className="fixed top-4 left-0 w-full flex items-center justify-between h-12 text-black px-4">
+        <div className="fixed top-4 left-0 w-full flex items-center justify-between h-12 text-black px-4 z-999">
             <div className="font-bold">
                 <Link href="/">Home</Link>
             </div>

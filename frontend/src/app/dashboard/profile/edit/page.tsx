@@ -28,7 +28,7 @@ export default  function RegisterPage() {
         }
     };
 
-    function handleCancle() {
+    function handleCancel() {
         router.push('/dashboard/profile');
     };
     
@@ -68,7 +68,7 @@ export default  function RegisterPage() {
 
                 <div>
                     <button type="submit" className="edit-btne">Save Changes</button>
-                    <button type="button" className="edit-btnc" onClick={handleCancle}>Cancel</button>
+                    <button type="button" className="edit-btnc" onClick={handleCancel}>Cancel</button>
                 </div> 
             </form>
             </div>

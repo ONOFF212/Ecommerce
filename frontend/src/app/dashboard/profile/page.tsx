@@ -36,9 +36,9 @@ export default function ProfilePage() {
                     <div className='profile-field'>
                         <label>ROLE</label>
                         <p className='role-badge'> 
-                            {typeof user?.role === "string"
-                            ? user.role
-                            : user?.role?.name || "Not available"}
+                            {typeof user?.roles === "string"
+                            ? user.roles
+                            : user?.roles?.name || "Not available"}
                         </p>
                     </div>
                 </div>

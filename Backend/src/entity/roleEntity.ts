@@ -2,7 +2,9 @@
 import {
     Entity,
     Column,
-    PrimaryGeneratedColumn
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+    CreateDateColumn
     } from 'typeorm';
 
 @Entity()
@@ -12,4 +14,10 @@ export class Roles {
 
     @Column({type:'varchar', nullable:false})
     name:string; 
+
+    // @CreateDateColumn()
+    // createdAt: Date;
+
+    // @UpdateDateColumn()
+    // updatedAt: Date;
 };
