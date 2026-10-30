@@ -4,6 +4,7 @@
 import { use, useEffect, useState } from "react";
 import { getProductById } from "@/app/api/productApi/pApi";
 import { useRouter } from "next/navigation";
+import { ShoppingCart } from "@/components/otherComponents/shoppingCart";
 
 interface singleProduct{
     img_url:string;
@@ -37,7 +38,7 @@ export default function ProductView({params}:paramsProps){
                 category: ""
             });
             
-            router.push('/dashboard/product');
+            router.push('/');
         }else{
             console.log("Failed to back");
         }
@@ -64,7 +65,7 @@ export default function ProductView({params}:paramsProps){
         return <p>isloading .......</p>
     };
     return (
-        <div className="grid min-h-[600px] grid-rows-[350px_1fr_auto]  m-4 overflow-hidden rounded-lg border border-slate-200 bg-white shadow-md">
+        <div className="grid min-h-[600px] grid-rows-[350px_1fr_auto] overflow-hidden rounded-lg border border-slate-200 bg-white shadow-md">
            <div className="flex items-center justify-center p-3">
              <img src={`${URL}/img/${singleProduct.img_url}` || ""} 
                  alt={singleProduct.img_url}  
@@ -85,6 +86,9 @@ export default function ProductView({params}:paramsProps){
                 <p className='text-sm font-bold text-red-600'>
                     Stock: {singleProduct.stock || ""}
                 </p>
+                <div>
+                    <ShoppingCart />
+                </div>
             </div>
             <div className="bg-white p-3">
                 <button className="w-full bg-slate-500 text-xl text-white font-bold rounded-3xl p-2 hover:bg-black "

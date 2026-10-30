@@ -4,13 +4,13 @@ import Link from "next/link";
 
 export default function Mainnavbar() {
     return (
-        <div className="fixed top-4 left-0 w-full flex items-center justify-between h-12 text-black px-4 z-999">
-            <div className="font-bold">
+        <div className=" flex items-center justify-center text-white">
+            <div className="font-bold gap-4 hover:text-blue-500">
                 <Link href="/">Home</Link>
             </div>
-            <div className="flex gap-4 font-bold">
-                <Link href="/auth/register" className="hover:bg-green-300 rounded-full p-2 hover:text-black">Sign Up</Link>
-                <Link href="/auth/login" className="hover:bg-green-300 rounded-full p-2 hover:text-black">Log In</Link>
+            <div className="flex gap-4 font-bold pl-4">
+                <Link href="/auth/register" className="hover:text-red-500 hover:text-black">Sign Up</Link>
+                <Link href="/auth/login" className="hover:text-red-500 hover:text-black">Log In</Link>
             </div>
         </div>
     );

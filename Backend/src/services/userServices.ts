@@ -3,9 +3,7 @@ import { AppDataSource } from "../dbconfig/db_config.ts";
 import { Users } from "../entity/userEntity.ts";
 import { userUpdate } from "../type_Checking/authDBType.ts";
 
-
 const userRepo = AppDataSource.getRepository(Users);
-
 
 export async function findUserByEmail(email:string){
     return await userRepo.findOne({

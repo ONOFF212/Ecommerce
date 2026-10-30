@@ -15,13 +15,13 @@ export const signup = async(ctx:Context) => {
 
     const hashed_password = await hash_password(validatedData.password);
     if(!hashed_password){
-        console.log("Failed to hased password");
+        ctx.body = {message:"Failed to hased password"};
         return;
     }
 
     const role = await findRoleID("customer");
     if(role === null || role === undefined) {
-        console.log("Error at assigning role....");
+        ctx.body = {message:"Error at assigning role...."};
         return;
     }
     const roleId = role?.id;
@@ -74,7 +74,6 @@ export const login = async(ctx:Context) => {
         return;
     }
     const Token = await generateToken({id:result.id ,name:result.name, email:result.email, role:{name:result.roles.name}});
-    //const result = await findUserById(emailResult.id);
     
     ctx.body = {
         message:"Login Sucessful....",

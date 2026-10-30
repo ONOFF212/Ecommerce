@@ -10,7 +10,7 @@ import SortProducts from "@/components/otherComponents/sortProducts";
 import { ProductsList } from "@/components/commonComponents/productList";
 
 export default function ProductPage(){
-  const [filters, setFilters] = useState({ search:"", category:"", minPrice:0, maxPrice:0, sort:"", page:1, limit:10 });
+  const [filters, setFilters] = useState({ search:"", category:"", minPrice:0, maxPrice:0, sort:"", page:1, limit:5 });
 
   const {products, totalPages} = productsHooks(filters);
   return (

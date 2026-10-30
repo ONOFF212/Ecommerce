@@ -3,6 +3,7 @@ import Koa from 'koa';
 import 'dotenv/config';
 import Path from 'path';
 import cors from "@koa/cors";
+import jwt from 'koa-jwt';
 
 import bodyParser from "koa-bodyparser";
 import serve from "koa-static";
@@ -12,7 +13,6 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 
 import { AppDataSource } from './dbconfig/db_config.ts';
-import {home_product_router } from './routes/homeProductRoutes.ts';
 import { product_router } from './routes/productRoute.ts';
 import {adminProductRouter} from './routes/adminProductRoutes.ts';
 import {adminCategoryRouter} from './routes/adminCategoryRoutes.ts';
@@ -41,19 +41,17 @@ const imageFolderPath = Path.join(__dirname, "..", 'img');
 app.use(mount('/img', serve(imageFolderPath)));
 
 app.use(auth_router.routes());
-app.use(home_product_router.routes());
-app.use(jwtAuthMiddlware);
-
-app.use(user_routes.routes());
 app.use(product_router.routes());
+//app.use(jwtAuthMiddlware);
+
+app.use(jwt({secret:String(process.env.JWT_KEY)}));
+app.use(user_routes.routes());
 app.use(adminCategoryRouter.routes());
 app.use(adminProductRouter.routes());
 
 const startServer = async () => {
     try {
         await AppDataSource.initialize();
-        
-        console.log("DB Connection Successful.....");
 
         await seedDatabase();
         await seedDbRole();

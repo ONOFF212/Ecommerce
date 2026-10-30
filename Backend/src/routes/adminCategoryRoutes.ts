@@ -11,7 +11,7 @@ from "../controllers/adminCategoryController.ts";
 
 export const adminCategoryRouter = new Router({prefix:"/api/auth"});
 
-adminCategoryRouter.post("/categorys",adminCreateCategory);
-adminCategoryRouter.get("/categorys", adminFetchCategory);
+adminCategoryRouter.post("/categorys", adminCreateCategory);
+adminCategoryRouter.get("/categorys",  adminFetchCategory);
 adminCategoryRouter.put("/categorys/:id", adminUpdateCategory);
-adminCategoryRouter.delete("/categorys/:id", adminDeleteCategory);
+adminCategoryRouter.delete("/categorys/:id",  adminDeleteCategory);

@@ -44,7 +44,7 @@ export async function findProductById(id:number){
 
 export async function updateProdut(id:number , {name, price, stock, description, img_url, categoryId} : saveProductTypes){
     const product = await productRepo.findOneBy({id});
-    console.log("details: ", {name, price, stock, description, img_url, categoryId});
+    
     if (!product) {
         return {message: "User not found"};
     }
