@@ -4,12 +4,15 @@ import { FiShoppingCart } from "react-icons/fi";
 import { CiHeart } from "react-icons/ci";
 import { IoSearch } from "react-icons/io5";
 import { useState } from "react";
+import Mainnavbar from '@/components/navbars/homeNavbars';
+import { useRouter } from "next/navigation";
 
 interface searchProps{
     onFilterChange:(filters:{search:string}) =>void;
 }
 
 export default function SearchNavBar( {onFilterChange}:searchProps){
+    const router = useRouter();
     const[searchQuery, setSearchQuery] = useState('');
 
     const handleQuery = async(value:string) => {
@@ -20,9 +23,16 @@ export default function SearchNavBar( {onFilterChange}:searchProps){
 
     return(
         <div>
-            <div className="flex justify-end gap-4 px-4 ">
-                <FiShoppingCart size={25} />
-                <CiHeart size={25} />
+            <div><Mainnavbar/></div>
+            <div className="flex justify-end gap-2 px-4 ">
+                <div>
+                    <FiShoppingCart size={25}
+                                    name="shoppingCart"
+                                    className="text-white hover:text-blue-500"
+                                    onClick={(e) => {router.push('/product/shoppingCart')}}
+                     />
+                </div>
+                <CiHeart size={25} className="text-white hover:text-red-500" />
             </div>
             <h3 className="font-mono font-bold text-2xl">Shopify</h3>
             <p className="text-sm">Everything you Love, In one Place</p>

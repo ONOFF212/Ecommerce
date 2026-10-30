@@ -121,7 +121,6 @@ export default function SideBar({onFilterChange}:categoryProps){
                         type="number"
                         id="minPrice"
                         name="minPrice"
-                        placeholder="1"
                         step="50"
                         min="1"
                         value={minPrice || ""}
@@ -133,7 +132,6 @@ export default function SideBar({onFilterChange}:categoryProps){
                         type="number"
                         id="maxPrice"
                         name="maxPrice"
-                        placeholder="1,000"
                         step="100"
                         max="1000"
                         value={maxPrice || ""}

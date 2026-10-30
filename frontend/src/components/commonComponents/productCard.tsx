@@ -2,6 +2,9 @@
 'use client';
 import { useRouter } from "next/navigation";
 
+import { ShoppingCart } from "../otherComponents/shoppingCart";
+
+
 interface productDetail {
     id:number;
     img_url:string;
@@ -22,7 +25,7 @@ export function ProductCard({product}:productDetailProps) {
     const router = useRouter();
 
     const handleViewProduct = async() => {
-        router.push(`/dashboard/product/views/${product.id}`);
+        router.push(`/product/views/${product.id}`);
     };
 
     return(
@@ -33,7 +36,7 @@ export function ProductCard({product}:productDetailProps) {
                  className='h-40 w-full p-4 object-contain'
             />
            </div>
-           <div className="min-h-0 overflow-y-auto px-3">
+           <div className="min-h-0 overflow-y-hidden px-3">
                 <h3 className='mb-2 font-semibold text-gray-800'>
                     {product.name}
                 </h3>
@@ -41,15 +44,18 @@ export function ProductCard({product}:productDetailProps) {
                 <p className="text-sm text-black text-justify ">
                     {product.description}
                 </p>
-                <p className='mt-2 text-sm font-bold text-green-500'>
+                <p className='mt-2 text-sm font-bold '>
                     Price: {product.price}
                 </p>
-                <p className='text-sm font-bold text-red-600'>
+                {/* <p className='text-sm font-bold text-red-600'>
                     Stock: {product.stock}
-                </p>
+                </p> */}
+                 <div>
+                    <ShoppingCart />
+                </div>
             </div>
             <div className="bg-white p-3">
-                <button className="w-full bg-green-500 text-white font-bold rounded-3xl p-2 hover:bg-[#4F46E5] "
+                <button className="w-full bg-black text-white font-bold rounded-3xl p-2 hover:bg-yellow-400 hover:text-black"
                         name="view"
                         onClick={handleViewProduct}
                 >

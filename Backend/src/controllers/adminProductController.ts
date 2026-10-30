@@ -14,8 +14,6 @@ export const adminCreateProduct = async (ctx:Context) =>{
     
     const validatedData = await productSchema.validate(ctx.request.body, {abortEarly:false});
 
-    console.log("create Product detail types checking: ", validatedData);
-
     const img_url = ctx.file.filename;
 
     const findCategoryId = await findCategoryByName(validatedData.category);
@@ -78,8 +76,7 @@ export const adminFetchById = async (ctx:Context) =>{
 
 export const adminUpdateProduct = async (ctx:Context) =>{
     let { name, price, stock, description, img_url, category} = ctx.request.body as updateProductTypes;
-    
-    console.log("inside admin product update function: ", {name, price, stock, description, img_url, category});
+
     const result = await findProductById(ctx.params.id);
     
     if(!result) {

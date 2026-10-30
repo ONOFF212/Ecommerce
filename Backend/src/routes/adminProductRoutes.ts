@@ -14,8 +14,8 @@ from "../controllers/adminProductController.ts";
 
 export const adminProductRouter = new Router({prefix:"/api/auth/admin"});
 
-adminProductRouter.post("/products",rolebasemiddleware, upload.single("img_url") ,adminCreateProduct);
-adminProductRouter.get("/products", rolebasemiddleware, adminFetchProduct);
-adminProductRouter.get("/products/:id",rolebasemiddleware, adminFetchById);
-adminProductRouter.put("/products/:id",rolebasemiddleware, upload.single("img_url"), adminUpdateProduct);
-adminProductRouter.delete("/products/:id",rolebasemiddleware, adminDeleteProduct);
+adminProductRouter.post("/products", upload.single("img_url") ,adminCreateProduct);
+adminProductRouter.get("/products", adminFetchProduct);
+adminProductRouter.get("/products/:id", adminFetchById);
+adminProductRouter.put("/products/:id", upload.single("img_url"), adminUpdateProduct);
+adminProductRouter.delete("/products/:id", adminDeleteProduct);
