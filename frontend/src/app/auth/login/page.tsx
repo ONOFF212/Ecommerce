@@ -2,12 +2,12 @@
 "use client"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { loginSchema, loginInput } from "@/utils/formTypeCheck";
+import { loginSchema, loginInput } from "@/features/auth/types/user";
 import Link from "next/link";
-import '../authStyle.css'
+import '../auth-style.css'
 import { useRouter } from "next/navigation";
-import { loginUser } from "@/app/api/authApi/auth";
-import { useAuth } from "@/contexts/authContext/authContext";
+import { loginUser } from "@/features/auth/service/auth-api";
+import { useAuth } from "@/contexts/auth/AuthContext";
 
 export default function LoginPage() {
     const {login} = useAuth();
@@ -72,7 +72,7 @@ export default function LoginPage() {
                         <button type="submit">Log In</button>
                     </div>
                     <div className="text-center font-semibold">
-                        <p>Don't have an account?
+                        <p>Don&apost have an account?
                         <Link href="/auth/register" className="text-blue-400 transition:0.5"> Register</Link>
                         </p>
                     </div>

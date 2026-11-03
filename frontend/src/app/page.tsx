@@ -1,9 +1,9 @@
 "use client"
 // import Header from "@/components/commonComponents/header";
 // import Mainnavbar from "@/components/navbars/homeNavbars";
-import Footer from "@/components/commonComponents/footer";
+import Footer from "@/components/layout/Footer";
 
-import ProductPage from "@/app/product/page";
+import ProductPage from "@/app/products/page";
 
 
 export default function Home(){

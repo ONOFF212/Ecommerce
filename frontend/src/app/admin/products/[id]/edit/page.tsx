@@ -4,11 +4,11 @@ import { use , useEffect, useState } from "react";
 import { LuImagePlus } from "react-icons/lu";
 import { useRouter } from "next/navigation";
 
-import { adminFetchProductById, adminUpdateProduct } from "@/app/api/adminApi/adminProductApi";
+import { fetchProductById, adminUpdateProduct } from "@/features/admin/services/admin-product-api";
 
 interface productDetail{
     img_url:string;
-    name:string;
+    name?:string;
     price:number;
     stock:number;
     description:string;
@@ -39,19 +39,19 @@ export default  function EditProduct({params}:paramsProps){
         async function fetchData(){
             const productId = Number(id);
             try{
-                const result = await adminFetchProductById(Number(productId));
+                const result = await fetchProductById(productId);
                 if(!result){
                     console.log("Error at Fetching Data");
                     return;
                 }
-                setProduct(result.result);
+                setProduct(result);
                 setUpdateProduct({
-                    name: result.result.name,
-                    img_url: null,
-                    price: result.result.price,
-                    stock: result.result.stock,
-                    description: result.result.description,
-                    category: result.result.category.name,
+                    name: result.name,
+                    img_url:null,
+                    price: result.price,
+                    stock: result.stock,
+                    description: result.description,
+                    category: result.category.name,
                 });
             }catch(error){
                 console.log("Failed the Fetch Product by ID", error);
@@ -68,7 +68,7 @@ export default  function EditProduct({params}:paramsProps){
     const handleProductUpdate = () => {
         console.log("product update value:",updateProduct);
         adminUpdateProduct(Number(id), updateProduct);
-        window.location.reload();
+        router.refresh();
     };
 
     return(
@@ -89,9 +89,9 @@ export default  function EditProduct({params}:paramsProps){
                     <h1 className="text-[20px]">Price</h1>
                         <input id="price"
                                name="price"
-                               value={updateProduct.price || ""}
+                               value={updateProduct.price}
                                onChange={(e) => {setUpdateProduct((prev) => ({...prev, price:Number(e.target.value)}))}}
-                               placeholder={`${product.price}` || "update price"}
+                               placeholder={`${product.price}`}
                                className="w-full p-1 border border-[#e2e8f0] outline-none rounded-lg hover:border-[#334155] bg-[#f8fafc]"
                         />
                 </div>
@@ -100,7 +100,7 @@ export default  function EditProduct({params}:paramsProps){
                     <h1 className="text-[20px]">Stock</h1>
                         <input id="stock"
                                name="stock"
-                               value={updateProduct.stock || ""}
+                               value={updateProduct.stock}
                                onChange={(e) => {setUpdateProduct((prev) => ({...prev, stock:Number(e.target.value)}))}}
                                placeholder={`${product.stock}`}
                                className="w-full p-1 border border-[#e2e8f0] outline-none rounded-lg hover:border-[#334155] bg-[#f8fafc]"

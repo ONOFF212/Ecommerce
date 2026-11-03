@@ -4,11 +4,11 @@ import { IoPeopleOutline } from "react-icons/io5";
 import { FaUserCheck } from "react-icons/fa";
 import { LuClock8 } from "react-icons/lu";
 import { LuSquareActivity } from "react-icons/lu";
-import { useAuth } from "@/contexts/authContext/authContext";
+import { useAuth } from "@/contexts/auth/AuthContext";
 
 
 export default function AdminPage(){
-    const {user} = useAuth();
+   const {user} = useAuth();
     return(
         <div>
             <div className=" p-4 text-black font-mono ">

@@ -1,16 +1,24 @@
 
 import type { ReactNode } from "react";
-import { AuthProvider } from "@/contexts/authContext/authContext";
-import AuthGuard from "@/contexts/authContext/authGuard";
+import { AuthProvider } from "@/contexts/auth/AuthContext";
+import AuthGuard from "@/contexts/auth/AuthGuard";
+
+import DashboardNavbar from "@/features/dashboard/components/DashboardNavbar";
+
 
 export default function DashboardLayout({children,}:{children:ReactNode}){
     return(
         <>
         <AuthProvider>
-            {/* <AuthGuard>
-                {children}
-            </AuthGuard> */}
-            {children}
+            <AuthGuard>
+                <div>
+                    <DashboardNavbar />
+                </div>
+                <main>
+                    {children}
+                </main>
+            </AuthGuard>
+            {/* {children} */}
         </AuthProvider>
         </>
     );

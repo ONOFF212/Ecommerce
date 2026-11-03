@@ -1,11 +1,9 @@
 
-import DashboardNavbar from "@/components/navbars/dashboardNavbar";
-import './dashboardStyle.css'
+import './dashboard-style.css'
 
 export default function DashboardPage(){
     return(
         <>
-        <DashboardNavbar />
         <main>
         </main>
         </>
