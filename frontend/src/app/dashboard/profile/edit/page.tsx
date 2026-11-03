@@ -1,12 +1,13 @@
 
 "use client"
-import "../../dashboardStyle.css";
-import { updateSchema, updateInput }  from "@/utils/formTypeCheck";
+
+import '../../dashboard-style.css';
+import { updateSchema, updateInput }  from "@/features/auth/types/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useRouter } from "next/navigation";
 import {useForm} from 'react-hook-form';
-import { updateUser } from "@/app/api/authApi/auth";
+import { updateUser } from "@/features/auth/service/auth-api";
 export default  function RegisterPage() {
     const router = useRouter();
 

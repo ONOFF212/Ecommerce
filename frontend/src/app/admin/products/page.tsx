@@ -1,11 +1,11 @@
 
 'use client';
-import adminProductsHooks from "@/hooks/adminProductsHook";
-import { AdminProductList } from "@/components/admin/adminProductList";
+import AdminProductsHooks from "@/features/admin/hooks/useAdminProducts";
+import { AdminProductList } from "@/features/admin/components/AdminProductList";
 
 export default function ProductPage(){
 
-    const {productsList} = adminProductsHooks();
+    const {productsList} = AdminProductsHooks();
     return(
         <>
         <div>

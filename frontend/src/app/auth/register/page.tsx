@@ -1,13 +1,13 @@
 
 "use client"
-import { signupSchema, signupInput }  from "@/utils/formTypeCheck";
+import { signupSchema, signupInput }  from "@/features/auth/types/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import "../authStyle.css";
+import "../auth-style.css";
 
 import { useRouter } from "next/navigation";
 import {useForm} from 'react-hook-form';
-import { signupUser } from "@/app/api/authApi/auth";
+import { signupUser } from "@/features/auth/service/auth-api";
 export default  function RegisterPage() {
     const router = useRouter();
 

@@ -1,8 +1,8 @@
 
 "use client"
-import '../dashboardStyle.css';
+import '../dashboard-style.css';
 
-import { useAuth } from '@/contexts/authContext/authContext';
+import { useAuth } from '@/contexts/auth/AuthContext';
 import { useRouter } from 'next/navigation';
 
 export default function ProfilePage() {

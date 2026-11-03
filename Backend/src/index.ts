@@ -12,24 +12,24 @@ import mount from "koa-mount";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 
-import { AppDataSource } from './dbconfig/db_config.ts';
-import { product_router } from './routes/productRoute.ts';
-import {adminProductRouter} from './routes/adminProductRoutes.ts';
-import {adminCategoryRouter} from './routes/adminCategoryRoutes.ts';
-import { auth_router } from './routes/authRoutes.ts';
-import { user_routes } from './routes/userRoutes.ts';
-import { seedDatabase } from './seeds/seedScript.ts'
-import { seedDbRole } from './seeds/roleScript.ts';
-
-import {jwtAuthMiddlware} from './middlewares/jwtAuthMiddleware.ts';
+import { AppDataSource } from './db-config/db-config.ts';
+import { adminProductRouter } from './routes/admin-products-routes.ts';
+import { adminCategoryRouter } from './routes/admin-categories-routes.ts';
+import { roleRouter } from './routes/role-routes.ts';
+import { authRouter } from './routes/auth-routes.ts';
+import { userRouter } from './routes/user-routes.ts';
+import { seedDatabase } from './seeds/products-seed.ts'
+import { seedDbRole } from './seeds/role-seed.ts';
 
 
 const app = new Koa();
 
 app.use(cors({
-    exposeHeaders:['Authorization', 'X-Total-Count'],
-    credentials: true,
+    allowHeaders:['Content-Type', "Authorization"],
+    exposeHeaders:['X-Total-Count'],
+    credentials:true,
     origin:"http://localhost:3000",
+    // allowMethods:["GET", "POST", "PUT", "DELETE", "PATCH"],
 }));
 
 const __filename = fileURLToPath(import.meta.url);
@@ -37,17 +37,16 @@ const __dirname = dirname(__filename);
 
 app.use(bodyParser());
 
-const imageFolderPath = Path.join(__dirname, "..", 'img'); 
-app.use(mount('/img', serve(imageFolderPath)));
+const imageFolderPath = Path.join(__dirname, "..", 'uploads'); 
+app.use(mount('/uploads', serve(imageFolderPath)));
 
-app.use(auth_router.routes());
-app.use(product_router.routes());
-//app.use(jwtAuthMiddlware);
+app.use(jwt({secret:String(process.env.JWT_KEY)}).unless({path:[/^\/public/]}));
 
-app.use(jwt({secret:String(process.env.JWT_KEY)}));
-app.use(user_routes.routes());
+app.use(authRouter.routes());
+app.use(userRouter.routes());
 app.use(adminCategoryRouter.routes());
 app.use(adminProductRouter.routes());
+app.use(roleRouter.routes());
 
 const startServer = async () => {
     try {
@@ -57,7 +56,7 @@ const startServer = async () => {
         await seedDbRole();
         app.listen(Number(process.env.PORT), () => {
             console.log(
-                `Server is running at port: ${Number(process.env.PORT)}`
+                `Server is running at port: ${(process.env.PORT)}`
             );
         });
     } catch (error) {

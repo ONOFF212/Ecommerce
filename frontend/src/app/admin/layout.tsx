@@ -1,13 +1,13 @@
 
-import "./adminStyle.css";
+import "./admin-style.css";
 import { ReactNode } from "react";
 
-import AdminHeader from "@/components/admin/adminHeader";
-import { AdminSideBar } from "@/components/admin/adminSidebar";
-import { AdminFooter } from "@/components/admin/adminFooter";
+import AdminHeader from "@/features/admin/components/AdminHeader";
+import { AdminSideBar } from "@/features/admin/components/AdminSidebar";
+import { AdminFooter } from "@/features/admin/components/AdminFooter";
 
-import AuthGuard from "@/contexts/authContext/authGuard";
-import { AuthProvider } from "@/contexts/authContext/authContext";
+import AuthGuard from "@/contexts/auth/AuthGuard";
+import { AuthProvider } from "@/contexts/auth/AuthContext";
 
 export default function AdminLayout({children}:{children : ReactNode}){
     return(
